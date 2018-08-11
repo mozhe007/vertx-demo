@@ -1,6 +1,9 @@
 package vertxdemo.demo;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Handler;
+import io.vertx.core.buffer.Buffer;
+import org.springframework.http.HttpRequest;
 
 public class Client extends AbstractVerticle {
 
@@ -16,6 +19,17 @@ public class Client extends AbstractVerticle {
             resp.bodyHandler(body -> {
                 System.out.println("Got data " + body.toString("ISO-8859-1"));
             });
+
+            resp.bodyHandler(new Handler<Buffer>() {
+                @Override
+                public void handle(Buffer buffer) {
+                    System.out.println("Got data " + buffer.toString("ISO-8859-1"));
+                }
+            });
         });
+
+
     }
+
+
 }
